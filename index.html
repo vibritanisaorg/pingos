@@ -16,7 +16,7 @@
       animation: gradient 15s ease infinite;
       font-family: "Comic Sans MS", cursive, sans-serif;
       overflow: hidden;
-      padding: 15px;
+      padding: 10px;
       box-sizing: border-box;
     }
 
@@ -27,16 +27,36 @@
     }
 
     .container {
+      background: rgba(255,255,255,0.82);
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.12);
       text-align: center;
-      color: #fff;
-      max-width: 600px;
+      color: #333;
+      max-width: 99vw;
       width: 100%;
+      padding: 24px 7vw;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
     }
 
     .pinguinos-img {
-      max-width: 90%;
+      max-width: 96vw;
+      width: 230px;
       height: auto;
       animation: bounce 2s infinite alternate;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.11));
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 10vw 2vw;
+      }
+      .pinguinos-img {
+        width: 78vw;
+        max-width: 98vw;
+      }
     }
 
     @keyframes bounce {
@@ -45,31 +65,30 @@
     }
 
     .message {
-      font-size: clamp(16px, 4vw, 20px);
-      margin-top: 20px;
-      border-right: 2px solid #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      display: inline-block;
-      animation: typing 8s steps(80) 1s 1 normal both, blink 0.7s infinite;
-      line-height: 1.4em;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
+      font-size: clamp(17px, 5vw, 21px);
+      margin: 18px auto 0 auto;
+      color: #222;
+      text-shadow: 0 2px 7px #fff, 0 0px 2px #a18cd1;
+      border-radius: 10px;
+      padding: 10px 2vw 10px 2vw;
+      background: rgba(255,255,255,0.68);
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      border: 1.5px solid #fcb69f;
+      line-height: 1.5em;
+      white-space: normal;
+      overflow-wrap: break-word;
     }
 
     .stars {
       position: absolute;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100vw; height: 100vh;
       pointer-events: none;
       overflow: hidden;
+      z-index: 0;
     }
 
     .star {
@@ -82,65 +101,150 @@
     }
 
     @keyframes twinkle {
-      0%, 100% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1.2); }
+      0%, 100% { opacity: 0; transform: scale(0.5);}
+      50% { opacity: 1; transform: scale(1.2);}
     }
 
     .btn {
-      margin-top: 30px;
-      padding: 15px 30px;
-      font-size: clamp(16px, 5vw, 22px);
+      margin-top: 22px;
+      padding: 18px 32px;
+      font-size: clamp(18px, 5vw, 26px);
       border: none;
       border-radius: 25px;
       cursor: pointer;
       background: #ff9a9e;
-      color: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+      transition: transform 0.2s, background 0.2s;
+      outline: 2px solid #fff4;
+      min-width: 200px;
+      min-height: 54px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      user-select: none;
     }
 
-    .btn:hover, .btn:active {
-      transform: scale(1.1);
+    .btn:hover, .btn:active, .btn:focus-visible {
+      transform: scale(1.08);
       background: #ff6a88;
+      outline: 2px solid #fcb69f;
     }
 
     .bouquet {
       position: absolute;
-      top: 55%;
+      top: 58%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
-      font-size: clamp(30px, 8vw, 50px);
       opacity: 0;
-      transition: all 1s ease;
+      transition: all 1s cubic-bezier(.68,-0.55,.27,1.55);
       white-space: nowrap;
+      z-index: 5;
+      pointer-events: none;
+      background: rgba(255,255,255,0.93);
+      border-radius: 18px;
+      padding: 6px 16px;
+      display: flex;
+      gap: 0.25em;
+      justify-content: center;
+      align-items: center;
+      min-width: 300px;
+      min-height: 60px;
     }
-
     .bouquet.show {
       transform: translate(-50%, -50%) scale(1);
       opacity: 1;
+      transition: all 1s cubic-bezier(.68,-0.55,.27,1.55);
       animation: float 4s infinite alternate;
+      pointer-events: auto;
+    }
+    .bouquet.fade {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.15);
+      transition: opacity 1.45s cubic-bezier(.68,-0.55,.27,1.55), transform 1.1s cubic-bezier(.68,-0.55,.27,1.55);
+      animation: none;
+      pointer-events: none;
+    }
+    @keyframes float {
+      from { transform: translate(-50%, -50%) scale(1) translateY(0);}
+      to { transform: translate(-50%, -50%) scale(1) translateY(-18px);}
     }
 
-    @keyframes float {
-      from { transform: translate(-50%, -50%) scale(1) translateY(0); }
-      to { transform: translate(-50%, -50%) scale(1) translateY(-20px); }
+    /* Girasol animaciones */
+    .sunflower {
+      display: inline-block;
+      font-size: clamp(30px, 9vw, 54px);
+      margin: 0 1px;
+      cursor: pointer;
+      transition: transform 0.15s, filter 0.15s;
+      will-change: transform, filter;
+      filter: drop-shadow(0 2px 5px #fbc2eb88);
+      animation: sunflower-in 0.8s cubic-bezier(.73,-0.13,.55,1.33);
+      user-select: none;
+      outline: none;
+    }
+    @keyframes sunflower-in {
+      0% { transform: scale(0.2) rotate(-180deg); opacity: 0;}
+      60% { transform: scale(1.15) rotate(15deg); opacity: 1;}
+      100% { transform: scale(1) rotate(0deg); opacity: 1;}
+    }
+    .sunflower.pop {
+      animation: sunflower-pop 0.5s cubic-bezier(.65,-0.16,.43,1.49);
+    }
+    @keyframes sunflower-pop {
+      0% { transform: scale(1) rotate(0);}
+      30% { transform: scale(1.3) rotate(-12deg);}
+      55% { transform: scale(0.9) rotate(6deg);}
+      100% { transform: scale(1) rotate(0);}
+    }
+
+    /* Corazon */
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: 22px;
+      opacity: 0.85;
+      animation: heart-float 1s ease-out forwards;
+      user-select: none;
+      z-index: 100;
+      filter: drop-shadow(0 2px 3px #fff7);
+    }
+    @keyframes heart-float {
+      0% { opacity: 1; transform: translateY(0) scale(1);}
+      70% { opacity: 0.9;}
+      100% { opacity: 0; transform: translateY(-60px) scale(1.7);}
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      opacity: 0.7;
+      z-index: 99;
+      pointer-events: none;
+      animation: confetti-fall 1.5s cubic-bezier(.54,-0.02,.6,1.12) forwards;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0deg);}
+      70% { opacity: 0.85;}
+      100% { transform: translateY(180px) rotate(360deg); opacity: 0;}
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="penguins">
-      <img src="pinguinos.png" alt="Pingüinos tiernos" class="pinguinos-img">
+      <img src="pinguinos.png" alt="Dos pingüinos abrazados, tiernos" class="pinguinos-img" role="img">
     </div>
-    <div class="message">
-      Quizá no pueda obsequiarte girasoles reales, pero no quiero que te quedes sin tus flores.  
-      Hoy te obsequio estos girasoles virtuales 🌻 y por más que no estén en físico, siempre trataré de darte lo mejor que pueda. Besito 💕
+    <div class="message" aria-label="Mensaje especial">
+      Quizá no pueda obsequiarte girasoles reales, pero no quiero que te quedes sin tus flores.<br>
+      Hoy te obsequio estos girasoles virtuales 🌻 y por más que no estén en físico, siempre trataré de darte lo mejor que pueda.<br>
+      Besito 💕
     </div>
-    <br>
-    <button class="btn" onclick="showBouquet()">💝 Haz clic aquí</button>
-    <div class="bouquet" id="bouquet">🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻</div>
+    <button class="btn" onclick="showBouquet()" aria-label="Haz clic para ver el ramo de girasoles" role="button">💝 Haz clic aquí</button>
+    <div class="bouquet" id="bouquet" aria-label="Ramo de girasoles" role="region"></div>
   </div>
-
   <div class="stars"></div>
 
   <script>
@@ -155,9 +259,99 @@
       starsContainer.appendChild(star);
     }
 
-    // Mostrar ramo
+    // Confetti colors
+    const confettiColors = ["#fcb69f", "#fbc2eb", "#a18cd1", "#ffecd2", "#ffef78", "#f9c846", "#ff90b3", "#aefbff"];
+
+    function createConfetti(x, y, container){
+      for(let i=0; i<36; i++){
+        const conf = document.createElement("div");
+        conf.className = "confetti";
+        conf.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+        conf.style.left = (x-5 + Math.random()*20) + "px";
+        conf.style.top = (y-10 + Math.random()*24) + "px";
+        conf.style.transform = `rotate(${Math.random()*360}deg)`;
+        conf.style.animationDelay = (Math.random()*0.3) + "s";
+        container.appendChild(conf);
+        setTimeout(()=>conf.remove(),1800);
+      }
+    }
+
+    // Mostrar ramo, animar girasoles y lanzar confetti
     function showBouquet() {
-      document.getElementById("bouquet").classList.add("show");
+      const bouquet = document.getElementById("bouquet");
+      bouquet.innerHTML = ""; // Limpiar por si acaso
+
+      // Crear 10 girasoles interactivos
+      for(let i=0; i<10; i++){
+        const sf = document.createElement("span");
+        sf.className = "sunflower";
+        sf.setAttribute("tabindex", "0");
+        sf.setAttribute("role","img");
+        sf.setAttribute("aria-label","Girasol");
+        sf.textContent = "🌻";
+        sf.addEventListener("click", (e) => {
+          sunflowerPop(sf, e);
+        });
+        sf.addEventListener("keydown", (e) => {
+          if(e.key === "Enter" || e.key === " ") {
+            sunflowerPop(sf, e, true);
+          }
+        });
+        bouquet.appendChild(sf);
+      }
+
+      bouquet.classList.add("show");
+      bouquet.classList.remove("fade");
+
+      // Confetti centrado donde aparece el ramo
+      const rect = bouquet.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      createConfetti(cx, cy, document.body);
+
+      setTimeout(() => {
+        bouquet.classList.add("fade");
+        setTimeout(() => {
+          bouquet.classList.remove("show", "fade");
+          bouquet.innerHTML = "";
+        }, 1700);
+      }, 3000);
+    }
+
+    // Animación y corazones al tocar girasol
+    function sunflowerPop(sf, e, keyboard=false){
+      sf.classList.remove("pop"); // reset anim
+      void sf.offsetWidth; // trigger reflow
+      sf.classList.add("pop");
+
+      // Posición del girasol
+      let rect = sf.getBoundingClientRect();
+      let x, y;
+      if(keyboard) {
+        // Centrar si viene de teclado
+        x = rect.left + rect.width/2;
+        y = rect.top + rect.height/2;
+      } else if(e && e.touches) {
+        x = e.touches[0].clientX;
+        y = e.touches[0].clientY;
+      } else if(e && e.clientX != null) {
+        x = e.clientX;
+        y = e.clientY;
+      } else {
+        x = rect.left + rect.width/2;
+        y = rect.top + rect.height/2;
+      }
+
+      // Corazones flotando
+      for(let i=0; i<3; i++){
+        const heart = document.createElement("span");
+        heart.className = "heart";
+        heart.textContent = "💖";
+        heart.style.left = (x - 8 + Math.random()*16) + "px";
+        heart.style.top = (y - 8 + Math.random()*8) + "px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(), 1050);
+      }
     }
   </script>
 </body>
