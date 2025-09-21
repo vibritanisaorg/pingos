@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flores Amarillas</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(270deg, #ffcc70, #ff6f91, #ffc75f, #f9f871);
+      background-size: 800% 800%;
+      animation: gradient 20s ease infinite;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .pinguinos-img {
+      width: 250px;
+      animation: bounce 2s infinite alternate;
+    }
+    @keyframes bounce {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-20px); }
+    }
+    .sunflowers {
+      font-size: 2rem;
+      margin-top: 10px;
+      animation: float 3s infinite alternate;
+    }
+    @keyframes float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px); }
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      text-align: center;
+      max-width: 600px;
+      white-space: pre-wrap;
+      border: 2px solid #fff;
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(0,0,0,0.4);
+    }
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      animation: fall 5s linear forwards;
+      color: red;
+    }
+    @keyframes fall {
+      from { transform: translateY(-10%); opacity: 1; }
+      to { transform: translateY(110%); opacity: 0; }
+    }
+    .stars span {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: gold;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+    .button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff6f91;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .sunflower-bouquet {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatBouquet 6s linear forwards;
+    }
+    @keyframes floatBouquet {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(-120%); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="penguins">
+    <img src="pinguinos.png" alt="Pingüinos tiernos" class="pinguinos-img">
+  </div>
+  <div class="sunflowers">🌻🌻🌻</div>
+
+  <div class="message" id="message"></div>
+
+  <button class="button" onclick="releaseBouquet()">💝 Haz clic aquí</button>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    // Texto con efecto máquina de escribir
+    const text = "Quizá no pueda obsequiarte girasoles reales, pero no quiero que te quedes sin tus flores.\nHoy te obsequio estos girasoles virtuales y por más que no estén en físico, siempre trataré de darte lo mejor que pueda.\nBesito 💕";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("message").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+    window.onload = typeWriter;
+
+    // Estrellas doradas
+    const starsContainer = document.getElementById("stars");
+    for (let j = 0; j < 40; j++) {
+      const star = document.createElement("span");
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.animationDuration = 1 + Math.random() * 2 + "s";
+      starsContainer.appendChild(star);
+    }
+
+    // Corazones al hacer clic
+    document.addEventListener("click", function(e) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = e.clientX + "px";
+      heart.style.top = e.clientY + "px";
+      heart.innerHTML = "❤️";
+      document.getElementById("hearts").appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    });
+
+    // Ramo sorpresa
+    function releaseBouquet() {
+      for (let k = 0; k < 7; k++) {
+        const bouquet = document.createElement("div");
+        bouquet.className = "sunflower-bouquet";
+        bouquet.style.left = Math.random() * 90 + "%";
+        bouquet.style.bottom = "0";
+        bouquet.innerHTML = "🌻🌻🌻";
+        document.body.appendChild(bouquet);
+        setTimeout(() => bouquet.remove(), 6000);
+      }
+    }
+  </script>
+</body>
+</html>
