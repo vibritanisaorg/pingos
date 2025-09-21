@@ -2,171 +2,162 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Flores Amarillas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regalo de Girasoles 🌻</title>
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(270deg, #ffcc70, #ff6f91, #ffc75f, #f9f871);
-      background-size: 800% 800%;
-      animation: gradient 20s ease infinite;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(-45deg, #ffecd2, #fcb69f, #a18cd1, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      font-family: "Comic Sans MS", cursive, sans-serif;
       overflow: hidden;
+      padding: 15px;
+      box-sizing: border-box;
     }
+
     @keyframes gradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
+
+    .container {
+      text-align: center;
+      color: #fff;
+      max-width: 600px;
+      width: 100%;
+    }
+
     .pinguinos-img {
-      width: 250px;
+      max-width: 90%;
+      height: auto;
       animation: bounce 2s infinite alternate;
     }
+
     @keyframes bounce {
-      from { transform: translateY(0px); }
-      to { transform: translateY(-20px); }
-    }
-    .sunflowers {
-      font-size: 2rem;
-      margin-top: 10px;
-      animation: float 3s infinite alternate;
-    }
-    @keyframes float {
       from { transform: translateY(0); }
       to { transform: translateY(-15px); }
     }
+
     .message {
+      font-size: clamp(16px, 4vw, 20px);
       margin-top: 20px;
-      font-size: 1.2rem;
-      color: #fff;
-      text-align: center;
-      max-width: 600px;
-      white-space: pre-wrap;
-      border: 2px solid #fff;
-      padding: 15px;
-      border-radius: 15px;
-      background: rgba(0,0,0,0.4);
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      animation: typing 8s steps(80) 1s 1 normal both, blink 0.7s infinite;
+      line-height: 1.4em;
     }
-    .hearts {
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .stars {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
+      overflow: hidden;
     }
-    .heart {
+
+    .star {
       position: absolute;
-      font-size: 2rem;
-      animation: fall 5s linear forwards;
-      color: red;
-    }
-    @keyframes fall {
-      from { transform: translateY(-10%); opacity: 1; }
-      to { transform: translateY(110%); opacity: 0; }
-    }
-    .stars span {
-      position: absolute;
-      width: 3px;
-      height: 3px;
+      width: 4px;
+      height: 4px;
       background: gold;
       border-radius: 50%;
       animation: twinkle 2s infinite;
     }
+
     @keyframes twinkle {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.2); }
     }
-    .button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #ff6f91;
-      color: white;
+
+    .btn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: clamp(16px, 5vw, 22px);
       border: none;
-      border-radius: 10px;
+      border-radius: 25px;
       cursor: pointer;
-      font-size: 1rem;
-      animation: pulse 2s infinite;
+      background: #ff9a9e;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+
+    .btn:hover, .btn:active {
+      transform: scale(1.1);
+      background: #ff6a88;
     }
-    .sunflower-bouquet {
+
+    .bouquet {
       position: absolute;
-      font-size: 2rem;
-      animation: floatBouquet 6s linear forwards;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: clamp(30px, 8vw, 50px);
+      opacity: 0;
+      transition: all 1s ease;
+      white-space: nowrap;
     }
-    @keyframes floatBouquet {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(-120%); opacity: 1; }
+
+    .bouquet.show {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      animation: float 4s infinite alternate;
+    }
+
+    @keyframes float {
+      from { transform: translate(-50%, -50%) scale(1) translateY(0); }
+      to { transform: translate(-50%, -50%) scale(1) translateY(-20px); }
     }
   </style>
 </head>
 <body>
-  <div class="stars" id="stars"></div>
-
-  <div class="penguins">
-    <img src="pinguinos.png" alt="Pingüinos tiernos" class="pinguinos-img">
+  <div class="container">
+    <div class="penguins">
+      <img src="pinguinos.png" alt="Pingüinos tiernos" class="pinguinos-img">
+    </div>
+    <div class="message">
+      Quizá no pueda obsequiarte girasoles reales, pero no quiero que te quedes sin tus flores.  
+      Hoy te obsequio estos girasoles virtuales 🌻 y por más que no estén en físico, siempre trataré de darte lo mejor que pueda. Besito 💕
+    </div>
+    <br>
+    <button class="btn" onclick="showBouquet()">💝 Haz clic aquí</button>
+    <div class="bouquet" id="bouquet">🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻</div>
   </div>
-  <div class="sunflowers">🌻🌻🌻</div>
 
-  <div class="message" id="message"></div>
-
-  <button class="button" onclick="releaseBouquet()">💝 Haz clic aquí</button>
-
-  <div class="hearts" id="hearts"></div>
+  <div class="stars"></div>
 
   <script>
-    // Texto con efecto máquina de escribir
-    const text = "Quizá no pueda obsequiarte girasoles reales, pero no quiero que te quedes sin tus flores.\nHoy te obsequio estos girasoles virtuales y por más que no estén en físico, siempre trataré de darte lo mejor que pueda.\nBesito 💕";
-    let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        document.getElementById("message").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 60);
-      }
-    }
-    window.onload = typeWriter;
-
-    // Estrellas doradas
-    const starsContainer = document.getElementById("stars");
-    for (let j = 0; j < 40; j++) {
-      const star = document.createElement("span");
+    // Crear estrellas
+    const starsContainer = document.querySelector('.stars');
+    for (let i = 0; i < 40; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
       star.style.top = Math.random() * 100 + "%";
       star.style.left = Math.random() * 100 + "%";
-      star.style.animationDuration = 1 + Math.random() * 2 + "s";
+      star.style.animationDuration = (1 + Math.random() * 2) + "s";
       starsContainer.appendChild(star);
     }
 
-    // Corazones al hacer clic
-    document.addEventListener("click", function(e) {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.style.left = e.clientX + "px";
-      heart.style.top = e.clientY + "px";
-      heart.innerHTML = "❤️";
-      document.getElementById("hearts").appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    });
-
-    // Ramo sorpresa
-    function releaseBouquet() {
-      for (let k = 0; k < 7; k++) {
-        const bouquet = document.createElement("div");
-        bouquet.className = "sunflower-bouquet";
-        bouquet.style.left = Math.random() * 90 + "%";
-        bouquet.style.bottom = "0";
-        bouquet.innerHTML = "🌻🌻🌻";
-        document.body.appendChild(bouquet);
-        setTimeout(() => bouquet.remove(), 6000);
-      }
+    // Mostrar ramo
+    function showBouquet() {
+      document.getElementById("bouquet").classList.add("show");
     }
   </script>
 </body>
