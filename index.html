@@ -2,42 +2,267 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Regalo de Girasoles 🌻</title>
   <style>
-    /* ... Tus estilos exactamente igual ... */
-    /* No hace falta editar el CSS */
+    :root {
+      --bg-color: #fffbf6;
+      --yellow: #ffe066;
+      --orange: #ffd166;
+      --sunflower: #FFD700;
+      --brown: #a67c52;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: var(--bg-color);
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .container {
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+      padding-bottom: 10vh;
+    }
+    .sunflowers-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: end;
+      gap: 8px;
+      margin-bottom: 40px;
+      width: 95vw;
+      min-height: 120px;
+      position: relative;
+      z-index: 2;
+    }
+    .sunflower-emoji {
+      font-size: 2.7rem;
+      animation: floatSunflower 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px #ffd70080);
+      position: relative;
+    }
+    .sunflower-emoji:nth-child(2n) {
+      animation-duration: 2.7s;
+      animation-delay: 0.5s;
+    }
+    .sunflower-emoji:nth-child(3n) {
+      animation-duration: 2.3s;
+      animation-delay: 0.8s;
+    }
+    .sunflower-emoji:nth-child(4n) {
+      animation-duration: 2.9s;
+      animation-delay: 0.2s;
+    }
+    .sunflower-emoji:nth-child(5n) {
+      animation-duration: 3.4s;
+      animation-delay: 1s;
+    }
+    @keyframes floatSunflower {
+      0% { transform: translateY(0) scale(1) rotate(-8deg);}
+      20% { filter: brightness(1.2) drop-shadow(0 0 12px #ffd700a0);}
+      50% { transform: translateY(-18px) scale(1.1) rotate(8deg);}
+      80% { filter: brightness(1.15);}
+      100% { transform: translateY(0) scale(1) rotate(-8deg);}
+    }
+
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      animation: sparkleFade 1.6s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes sparkleFade {
+      0%,100% { opacity: 0; transform: scale(0.4);}
+      25% { opacity: 1; transform: scale(1.1);}
+      70% { opacity: 0.9; }
+      85% { opacity: 0.4; }
+    }
+
+    .envelope-btn {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 3.2rem;
+      margin: 0 0.5rem;
+      transition: transform 0.11s;
+      z-index: 3;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .envelope-btn:active {
+      transform: scale(1.09);
+    }
+    .envelope-label {
+      font-size: 1.05rem;
+      margin-top: 0.2rem;
+      color: #8c5336;
+      letter-spacing: .03em;
+      text-shadow: 0 1px 4px #fff8e1;
+      font-weight: 500;
+    }
+
+    .message-popup {
+      position: fixed;
+      left: 50%;
+      bottom: 12vh;
+      transform: translate(-50%,0);
+      background: #fffbe9ee;
+      box-shadow: var(--shadow),0 0 0 6px #ffe06622;
+      border-radius: 1.5rem;
+      max-width: 90vw;
+      padding: 2.3rem 1.2rem 1.5rem 1.2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #7d5429;
+      z-index: 100;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid #ffe06699;
+    }
+    .message-popup.active {
+      opacity: 1;
+      pointer-events: auto;
+      animation: popupBounce 0.7s cubic-bezier(.32,1.35,.34,1.01) 1;
+    }
+    @keyframes popupBounce {
+      0% { transform: translate(-50%,70px) scale(.8);}
+      60% { transform: translate(-50%,-12px) scale(1.04);}
+      100% { transform: translate(-50%,0) scale(1);}
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #ffb200;
+      margin-top: 0.7rem;
+      cursor: pointer;
+      transition: transform 0.11s;
+      filter: drop-shadow(0 0 6px #ffe06688);
+    }
+    .close-btn:active {
+      transform: scale(1.15);
+    }
+
+    /* Mobile - extra touch */
+    @media (max-width: 600px) {
+      .container { padding-bottom: 6vh; }
+      .sunflowers-row { min-height: 80px; }
+      .sunflower-emoji { font-size: 2.1rem; }
+      .message-popup { font-size: 1rem; padding: 1.5rem 1rem 1rem 1rem;}
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="penguins">
-      <!-- Verifica que la imagen exista en la misma carpeta -->
-      <img src="pinguinos.png" alt="Dos pingüinos abrazados, tiernos" class="pinguinos-img" role="img">
+    <div class="sunflowers-row" id="sunflowersRow">
+      <!-- Sunflower emojis and envelope will be inserted via JS -->
     </div>
-    <div class="message" aria-label="Mensaje especial">
-      Quizá no pueda obsequiarte girasoles reales, pero no quiero que te quedes sin tus flores.<br>
-      Hoy te obsequio estos girasoles virtuales 🌻 y por más que no estén en físico, siempre trataré de darte lo mejor que pueda.<br>
-      Besito 💕
-    </div>
-    <button class="btn-envelope" onclick="openEnvelope()" aria-label="Haz clic para abrir el sobre" role="button">
-      <span class="envelope-outer">
-        <span class="envelope-base"></span>
-        <span class="envelope-flap" id="envelopeFlap"></span>
-        <span class="envelope-heart">💌</span>
-        <span class="envelope-card" id="envelopeCard">
-          Quizá no pueda obsequiarte girasoles reales, pero no quiero que te quedes sin tus flores.<br>
-          Hoy te obsequio estos girasoles virtuales 🌻 y por más que no estén en físico, siempre trataré de darte lo mejor que pueda.<br>
-          Besito 💕
-        </span>
-      </span>
-      <span class="envelope-label">Haz clic aquí</span>
+    <button class="envelope-btn" id="envelopeBtn" aria-label="Haz clic para abrir el mensaje" role="button">
+      <span style="font-size: 3.2rem;" id="envelopeEmoji">💌</span>
+      <span class="envelope-label">Tu mensaje</span>
     </button>
   </div>
-  <div class="stars"></div>
+
+  <div class="message-popup" id="messagePopup" aria-label="Mensaje especial">
+    <div>
+      Quizá no pueda obsequiarte girasoles reales, pero no quiero que te quedes sin tus flores.<br>
+      Hoy te obsequio estos girasoles virtuales 🌻 y por más que no estén en físico, siempre trataré de darte lo mejor que pueda.<br>
+      <b>Besito 💕</b>
+    </div>
+    <button class="close-btn" onclick="closeMessage()" aria-label="Cerrar mensaje">✕</button>
+  </div>
 
   <script>
-    // ... Todo el JavaScript igual, no hay errores ...
+    // SUNFLOWERS + SPARKLES
+    const sunflowersRow = document.getElementById('sunflowersRow');
+    const envelopeBtn = document.getElementById('envelopeBtn');
+    const envelopeEmoji = document.getElementById('envelopeEmoji');
+    const sunflowerCount = Math.max(12, Math.floor(window.innerWidth / 38));
+    const sunflowerEmojis = [];
+    for(let i=0;i<sunflowerCount;i++){
+      const sf = document.createElement('span');
+      sf.className = 'sunflower-emoji';
+      sf.textContent = '🌻';
+      sf.style.left = (Math.random()*4-2)+'px';
+      sf.style.top = (Math.random()*2-1)+'px';
+      sunflowersRow.appendChild(sf);
+
+      // Add some random sparkles to some sunflowers
+      if(Math.random()<0.55) {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle';
+        sparkle.textContent = '✨';
+        // Place sparkle over the sunflower
+        sparkle.style.left = (8 + Math.random()*12)+'px';
+        sparkle.style.top = (-6 + Math.random()*6)+'px';
+        sparkle.style.fontSize = (1.1+Math.random()*0.5)+'rem';
+        sparkle.style.color = '#ffe066';
+        // Animation delay so they don't all sparkle at once
+        sparkle.style.animationDelay = (Math.random()*1.4)+'s';
+        sf.style.position = 'relative';
+        sf.appendChild(sparkle);
+      }
+      sunflowerEmojis.push(sf);
+    }
+
+    // ENVELOPE BUTTON in the middle
+    setTimeout(()=>{
+      // Insert envelope in the middle
+      const mid = Math.floor(sunflowerEmojis.length/2);
+      sunflowersRow.insertBefore(envelopeBtn, sunflowerEmojis[mid]);
+    }, 120);
+
+    // MESSAGE POPUP LOGIC
+    const messagePopup = document.getElementById('messagePopup');
+    envelopeBtn.onclick = function() {
+      messagePopup.classList.add('active');
+      setTimeout(()=>{
+        // Focus for accessibility; will not scroll the page
+        messagePopup.focus({preventScroll:true});
+      }, 160);
+    };
+    function closeMessage() {
+      messagePopup.classList.remove('active');
+    }
+    window.closeMessage = closeMessage;
+    // Close popup on background tap
+    document.addEventListener('click', function(e){
+      if(messagePopup.classList.contains('active') &&
+         !messagePopup.contains(e.target) &&
+         e.target!==envelopeBtn && e.target!==envelopeEmoji) {
+        closeMessage();
+      }
+    });
+
+    // Prevent scrolling when popup is open (for mobile)
+    document.addEventListener('touchmove', function(e){
+      if(messagePopup.classList.contains('active')) {
+        e.preventDefault();
+      }
+    }, {passive:false});
   </script>
 </body>
 </html>
